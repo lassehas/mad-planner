@@ -1,8 +1,8 @@
-<div>
+<div class="p-6">
     <x-filament::section>
         <form wire:submit="create">
             {{ $this->form }}
-            <button type="submit">
+            <button type="submit" class="text-black dark:text-white mt-5">
                 Create
             </button>
         </form> 
