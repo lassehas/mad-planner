@@ -59,10 +59,11 @@ class User extends Authenticatable
 
     public function find_suiteable_household()
     {
-        if ($this->household_owned->isNotEmpty()){
+        
+        if ($this->household_owned != null && $this->household_owned->isNotEmpty()){
             return $this->household_owned->first();
         }
-        if ($this->household_in->isNotEmpty()){
+        if ($this->household_in && $this->household_in->isNotEmpty()){
             return $this->household_in->first();
         }
         return null;
