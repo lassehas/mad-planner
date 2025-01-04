@@ -6,6 +6,14 @@ use Livewire\Component;
 
 class Home extends Component
 {
+    public $household;
+
+    public function mount()
+    {
+        $user = auth()->user();
+        $this->household = $user->find_suiteable_household();
+    }
+
     public function render()
     {
         return view('livewire.navigation.home');
@@ -33,11 +41,17 @@ class Home extends Component
 
     public function list_buy_items()
     {
-        return redirect()->route('list.buy-items', ['household_id' => auth()->user()->find_suiteable_household()->id]);
+        if ($this->household == null){
+            return;
+        }
+        return redirect()->route('list.buy-items', ['household_id' => $this->household->id]);
     }
 
     public function list_week_plans()
     {
-        return redirect()->route('list.week-plans', ['household_id' => auth()->user()->find_suiteable_household()->id]);
+        if ($this->household == null){
+            return;
+        }
+        return redirect()->route('list.week-plans', ['household_id' => $this->household->id]);
     }
 }

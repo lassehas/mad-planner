@@ -23,7 +23,16 @@ class UserHouseHoldResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                    ->label('User Id')
+                    ->required()
+                    ->searchable()
+                    ->options(fn () => \App\Models\User::all()->pluck('name', 'id')->toArray()),
+                Forms\Components\Select::make('house_hold_id')
+                    ->label('House Hold Id')
+                    ->required()
+                    ->searchable()
+                    ->options(fn () => \App\Models\HouseHold::all()->pluck('name', 'id')->toArray()),
             ]);
     }
 
