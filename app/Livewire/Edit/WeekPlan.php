@@ -37,19 +37,19 @@ class WeekPlan extends Component  implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Navn')
                     ->disabled(),
                 TextInput::make('house_hold_id')
                     ->label('Household ID')
                     ->disabled(),
                 DatePicker::make('start_date')
-                    ->label('Start Date')
+                    ->label('Start dato')
                     ->disabled(),
                 DatePicker::make('end_date')
-                    ->label('End Date')
+                    ->label('Slut dato')
                     ->disabled(),
                 Select::make('monday_dish_id')
-                    ->label('Monday Dish')
+                    ->label('Mandag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -64,7 +64,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('tuesday_dish_id')
-                    ->label('Tuesday Dish')
+                    ->label('Tirsdag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -79,7 +79,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('wednesday_dish_id')
-                    ->label('Wednesday Dish')
+                    ->label('Onsdag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -94,7 +94,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('thursday_dish_id')
-                    ->label('Thursday Dish')
+                    ->label('Torsdag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -109,7 +109,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('friday_dish_id')
-                    ->label('Friday Dish')
+                    ->label('Fredag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -124,7 +124,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('saturday_dish_id')
-                    ->label('Saturday Dish')
+                    ->label('Lørdag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
@@ -139,7 +139,7 @@ class WeekPlan extends Component  implements HasForms
                             })
                     ),
                 Select::make('sunday_dish_id')
-                    ->label('Sunday Dish')
+                    ->label('Søndag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')

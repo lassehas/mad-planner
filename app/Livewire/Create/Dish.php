@@ -25,15 +25,16 @@ class Dish extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Navn')
                     ->required(),
                 TextInput::make('url')
-                    ->label('URL'),
+                    ->label('Link'),
                 TextInput::make('rating')
                     ->label('Rating')
+                    ->maxValue(10)
                     ->numeric(),
                 Textarea::make('description')
-                    ->label('Description')
+                    ->label('Beskrivelse')
                     ->columnSpanFull(),
             ])->columns(2)->statePath('data');
     }

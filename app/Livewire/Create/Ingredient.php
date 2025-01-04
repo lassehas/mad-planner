@@ -27,17 +27,18 @@ class Ingredient extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Navn')
                     ->required(),
                 TextInput::make('price')
-                    ->label('Price')
+                    ->label('Pris')
                     ->numeric()
+                    ->default(0)
                     ->required(),
                 TextInput::make('quantity')
-                    ->label('Quantity')
+                    ->label('Mængde/Antal')
                     ->required(),
                 Select::make('unit_id')
-                    ->label('Unit')
+                    ->label('Enhed')
                     ->required()
                     ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
             ])->columns(2)->statePath('data');

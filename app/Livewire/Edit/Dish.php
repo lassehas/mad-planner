@@ -32,13 +32,14 @@ class Dish extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Navn')
                     ->disabled(),
                 TextInput::make('price')
                     ->disabled()
+                    ->label('Pris')
                     ->suffix('Kr.'),
                 TextInput::make('url')
-                    ->label('URL')
+                    ->label('Link')
                     ->suffixAction(
                         Action::make('open')
                             ->icon('heroicon-o-arrow-up-right')
@@ -48,9 +49,10 @@ class Dish extends Component implements HasForms
                     ),
                 TextInput::make('rating')
                     ->label('Rating')
+                    ->maxValue(10)
                     ->numeric(),
                 Textarea::make('description')
-                    ->label('Description')
+                    ->label('Beskrivelse')
                     ->columnSpanFull(),
             ])->columns(2)->statePath('data');
     }

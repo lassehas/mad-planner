@@ -3,7 +3,7 @@
         <form wire:submit="update">
             {{ $this->form }}
             <button type="submit" class="text-black dark:text-white mt-5">
-                Update
+                Opdatere
             </button>
         </form> 
 
@@ -12,11 +12,11 @@
     <x-filament::section>
         @livewire('components.add-ingredient', ['dish_id' => $dish->id])
 
-        <h2 class="text-black dark:text-white">Ingredients</h2>
+        <h2 class="text-black dark:text-white">Ingredienser</h2>
         @foreach ($dish->ingredients as $ingredient)
             <div class="text-black dark:text-white">
                 <span>{{ $ingredient->formatted_text() }}</span>
-                <button wire:click="remove({{ $ingredient->id }})">Remove</button>
+                <button wire:click="remove({{ $ingredient->id }})">Fjern</button>
             </div>
         @endforeach
     </x-filament::section>

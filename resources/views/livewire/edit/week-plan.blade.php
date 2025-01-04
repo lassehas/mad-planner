@@ -3,7 +3,7 @@
         <form wire:submit="update">
             {{ $this->form }}
             <button type="submit" class="text-black dark:text-white mt-5"> 
-                Update
+                Opdatere
             </button>
         </form> 
 

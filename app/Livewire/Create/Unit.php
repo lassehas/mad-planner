@@ -20,7 +20,7 @@ class Unit extends Component  implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Navn')
                     ->required(),
             ])->statePath('data');
     }
