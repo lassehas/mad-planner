@@ -8,7 +8,7 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-        <div class="pb-3">
+        <div class="pb-5">
             {{ $slot }}
         </div>
         <livewire:navigation.bottom-bar :current_url="request()->url()" />

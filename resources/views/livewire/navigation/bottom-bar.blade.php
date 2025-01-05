@@ -1,4 +1,4 @@
-<div class="fixed bottom-0 w-full p-1 bg-white border-gray-200 border-t grid grid-cols-3">
+<div class="fixed bottom-0 w-full p-2 bg-white border-gray-200 border-t grid grid-cols-3">
     <div class="col-span-1 justify-center items-center flex">
         <a wire:click="back" class="">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
