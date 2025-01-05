@@ -1,4 +1,4 @@
-<div class="p-1 pb-8">
+<div class="px-1 pt-1 pb-8">
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>
