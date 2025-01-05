@@ -18,7 +18,7 @@ class BottomBar extends Component
     public function render()
     {
 
-        return view('livewire.navigation.ui.bottom-bar');
+        return view('livewire.navigation.bottom-bar');
     }
 
     public function back()
