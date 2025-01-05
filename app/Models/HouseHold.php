@@ -50,9 +50,14 @@ class HouseHold extends Model
     public function add_dish_to_buy_list(\App\Models\Dish $dish)
     {
         foreach ($dish->ingredients as $ingredient) {
-            $this->buy_items()->create([
-                'ingredient_id' => $ingredient->id
-            ]);
+            $this->add_ingredient_to_buy_list($ingredient);
         }
+    }
+
+    public function add_ingredient_to_buy_list(\App\Models\Ingredient $ingredient)
+    {
+        $this->buy_items()->create([
+            'ingredient_id' => $ingredient->id
+        ]);
     }
 }

@@ -10,17 +10,16 @@ class WeekPlans extends Component
     public function mount($household_id)
     {
         $household = \App\Models\HouseHold::find($household_id);
-        if (!$household->has_access(auth()->user())){
+        if (!$household->has_access(auth()->user())) {
             return;
         }
         $weekplans = \App\Models\WeekPlan::query()->where('house_hold_id', $household->id)->get();
-        
         $current_week_plan = $weekplans->filter(fn($weekplan) => $weekplan->name == $this->week_plan_name())->first();
-        if ($current_week_plan == null){
+        if ($current_week_plan == null) {
             $current_week_plan = \App\Models\WeekPlan::updateOrCreate([
                 'house_hold_id' => $household->id,
                 'name' => $this->week_plan_name(),
-            ],[
+            ], [
                 'start_date' => now()->startOfWeek(),
                 'end_date' => now()->endOfWeek(),
             ]);

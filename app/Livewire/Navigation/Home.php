@@ -19,19 +19,9 @@ class Home extends Component
         return view('livewire.navigation.home');
     }
 
-    public function create_unit()
+    public function list_creations()
     {
-        return redirect()->route('creation.unit');
-    }
-
-    public function create_ingredient()
-    {
-        return redirect()->route('creation.ingredient');
-    }
-
-    public function create_dish()
-    {
-        return redirect()->route('creation.dish');
+        return redirect()->route('creations');
     }
 
     public function list_dishes()
@@ -53,5 +43,10 @@ class Home extends Component
             return;
         }
         return redirect()->route('list.week-plans', ['household_id' => $this->household->id]);
+    }
+
+    public function list_ingredients()
+    {
+        return redirect()->route('list.ingredients');
     }
 }

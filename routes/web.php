@@ -13,7 +13,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'edit'], function () {
         Route::get('dish/{dish_id}', \App\Livewire\Edit\Dish::class)->name('edit.dish');
         Route::get('week-plan/{week_plan_id}', \App\Livewire\Edit\WeekPlan::class)->name('edit.week-plan');
+        Route::get('ingredient/{ingredient_id}', \App\Livewire\Edit\Ingredient::class)->name('edit.ingredient');
     });
+
+    Route::get('/creations', \App\Livewire\Navigation\List\Creations::class)->name('creations');
 
     Route::get('/', \App\Livewire\Navigation\Home::class)->name('home');
 
@@ -21,5 +24,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dishes', \App\Livewire\Navigation\List\Dishes::class)->name('list.dishes');
         Route::get('buy-items/{household_id}', \App\Livewire\Navigation\List\BuyItems::class)->name('list.buy-items');
         Route::get('week-plans/{household_id}', \App\Livewire\Navigation\List\WeekPlans::class)->name('list.week-plans');
+        Route::get('ingredients', \App\Livewire\Navigation\List\Ingredients::class)->name('list.ingredients');
     });
 });
