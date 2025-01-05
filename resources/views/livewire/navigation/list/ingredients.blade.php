@@ -2,10 +2,10 @@
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>
-                <th style="text-align: left; width: 45%;">Navn</th>
+                <th style="text-align: left; width: 40%;">Navn</th>
                 <th style="text-align: left; width: 25%;">Mængde</th>
                 <th style="text-align: left; width: 20%;">Pris</th>
-                <th style="text-align: right; width: 10%;"></th>
+                <th style="text-align: right; width: 15%;"></th>
             </tr>
         </thead>
         <tbody>
