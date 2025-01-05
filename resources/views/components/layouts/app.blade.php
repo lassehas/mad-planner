@@ -11,6 +11,6 @@
         <div class="pb-3">
             {{ $slot }}
         </div>
-        <livewire:navigation.ui.bottom-bar :current_url="request()->url()" />
+        <livewire:navigation.bottom-bar :current_url="request()->url()" />
     </body>
 </html>
