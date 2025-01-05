@@ -23,6 +23,12 @@
                     </td>
                 </tr>
             @endforeach
+            <tr class="border-t-2">
+                <td></td>
+                <td></td>
+                <td>{{ $this->total_price() }} kr.</td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -2,15 +2,17 @@
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>
-                <th style="text-align: left; width: 60%;">Navn</th>
-                <th style="text-align: left; width: 25%;">Pris</th>
-                <th style="text-align: right; width: 15%;"></th>
+                <th style="text-align: left; width: 45%;">Navn</th>
+                <th style="text-align: left; width: 25%;">Mængde</th>
+                <th style="text-align: left; width: 20%;">Pris</th>
+                <th style="text-align: right; width: 10%;"></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($ingredients as $ingredient)
                 <tr>
                     <td>{{ $ingredient->name }}</td>
+                    <td>{{ $ingredient->quantity }} {{ $ingredient->unit->name }}</td>
                     <td>{{ $ingredient->price }} kr.</td>
                     <td style="text-align: right;">
                         @if (auth()->user()->find_suiteable_household() != null)
