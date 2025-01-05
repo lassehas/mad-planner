@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Navigation\UI;
+namespace App\Livewire\Navigation;
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
