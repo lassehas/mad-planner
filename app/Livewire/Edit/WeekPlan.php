@@ -39,15 +39,12 @@ class WeekPlan extends Component  implements HasForms
                 TextInput::make('name')
                     ->label('Navn')
                     ->disabled(),
-                TextInput::make('house_hold_id')
-                    ->label('Household ID')
-                    ->disabled(),
-                DatePicker::make('start_date')
-                    ->label('Start dato')
-                    ->disabled(),
-                DatePicker::make('end_date')
-                    ->label('Slut dato')
-                    ->disabled(),
+                // DatePicker::make('start_date')
+                //     ->label('Start dato')
+                //     ->disabled(),
+                // DatePicker::make('end_date')
+                //     ->label('Slut dato')
+                //     ->disabled(),
                 Select::make('monday_dish_id')
                     ->label('Mandag ret')
                     ->options($options)
