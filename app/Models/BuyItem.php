@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BuyItem extends Model
 {
-    protected $fillable = ['house_hold_id', 'ingredient_id'];
+    protected $fillable = ['house_hold_id', 'ingredient_id', 'status'];
 
     public function ingredient()
     {
@@ -16,5 +16,10 @@ class BuyItem extends Model
     public function houseHold()
     {
         return $this->belongsTo(HouseHold::class, 'id', 'house_hold_id');
+    }
+
+    public function is_purchased()
+    {
+        return $this->status === 'purchased';
     }
 }
