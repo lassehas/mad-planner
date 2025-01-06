@@ -6,7 +6,7 @@
                 <th style="text-align: left; width: 25%;">Mængde</th>
                 <th style="text-align: left; width: 20%;">Pris</th>
                 <th style="text-align: right; width: 10%;">
-                    @if (count($items) > 0)
+                    @if (count($items) > 0 && !$this->is_buy_list_purchased())
                         <button wire:click="purchase_all">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
