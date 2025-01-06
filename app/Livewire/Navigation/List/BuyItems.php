@@ -56,7 +56,7 @@ class BuyItems extends Component
 
     public function purchase_all()
     {
-        foreach ($this->items as $item){
+        foreach ($this->items->filter(fn ($it) => $it->status === null) as $item){
             $item->update([
                 'status' => 'purchased'
             ]);
