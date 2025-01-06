@@ -51,6 +51,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -65,6 +66,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -79,6 +81,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -93,6 +96,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -106,7 +110,8 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Fredag ret')
                     ->options($options)
                     ->suffixAction(
-                        Action::make('add_monday_dish_to_buy_list')
+                        Action::make('add_monday_dish_to_buy_list') 
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -121,6 +126,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
@@ -135,6 +141,7 @@ class WeekPlan extends Component  implements HasForms
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
                             ->icon('heroicon-o-plus-circle')
                             ->action(function ($state) {
                                 $dish = \App\Models\Dish::find($state);
