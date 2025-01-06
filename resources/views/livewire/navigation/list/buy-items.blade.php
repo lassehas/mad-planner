@@ -52,7 +52,7 @@
             <tr class="border-t-2">
                 <td></td>
                 <td></td>
-                <td class="h-8">{{ $this->total_price() }} kr.</td>
+                <td class="h-8 font-bold">{{ $this->total_price() }} kr.</td>
                 <td style="text-align: right;">
                     @if ($this->is_buy_list_purchased())
                         <button wire:click="remove_all">
