@@ -34,7 +34,6 @@ class WeekPlan extends Component  implements HasForms
     public function form(Form $form): Form
     {
         $options = \App\Models\Dish::all()->mapWithKeys(fn($dish) => [$dish->id => "{$dish->name} ({$dish->price} kr.)"]);
-
         return $form
             ->schema([
                 TextInput::make('name')
