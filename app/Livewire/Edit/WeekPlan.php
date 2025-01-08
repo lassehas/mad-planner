@@ -59,6 +59,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('tuesday_dish_id')
@@ -74,6 +79,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('wednesday_dish_id')
@@ -89,6 +99,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('thursday_dish_id')
@@ -104,6 +119,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('friday_dish_id')
@@ -119,6 +139,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('saturday_dish_id')
@@ -134,6 +159,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('sunday_dish_id')
@@ -149,6 +179,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 TextInput::make('total_price')

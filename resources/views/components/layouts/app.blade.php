@@ -6,11 +6,15 @@
 
         <title>{{ $title ?? 'Mad planner' }}</title>
         @vite('resources/css/app.css')
+        @filamentStyles
     </head>
     <body>
         <div class="pb-5">
             {{ $slot }}
         </div>
         <livewire:navigation.bottom-bar :current_url="request()->url()" />
+        @livewire('notifications')
+        @filamentScripts
+        @vite('resources/js/app.js')
     </body>
 </html>
