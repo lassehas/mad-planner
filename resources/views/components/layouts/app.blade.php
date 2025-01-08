@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>{{ $title ?? 'Mad planner' }}</title>
-        @filamentStyles
+        {{-- @filamentStyles --}}
         @vite('resources/css/app.css')
     </head>
     <body>
@@ -13,8 +13,8 @@
             {{ $slot }}
         </div>
         <livewire:navigation.bottom-bar :current_url="request()->url()" />
-        {{-- @livewire('notifications')
+        @livewire('notifications')
         @filamentScripts
-        @vite('resources/js/app.js') --}}
+        @vite('resources/js/app.js')
     </body>
 </html>
