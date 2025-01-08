@@ -8,6 +8,5 @@
         </form> 
 
         <x-filament-actions::modals />
-        @livewire('')
     </x-filament::section>
 </div>
