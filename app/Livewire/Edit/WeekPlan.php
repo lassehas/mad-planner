@@ -40,12 +40,6 @@ class WeekPlan extends Component  implements HasForms
                 TextInput::make('name')
                     ->label('Navn')
                     ->disabled(),
-                // DatePicker::make('start_date')
-                //     ->label('Start dato')
-                //     ->disabled(),
-                // DatePicker::make('end_date')
-                //     ->label('Slut dato')
-                //     ->disabled(),
                 Select::make('monday_dish_id')
                     ->label('Mandag ret')
                     ->options($options)
@@ -59,11 +53,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
-                                Notification::make('dish_added')
-                                    ->title('Ret tilføjet')
-                                    ->duration(1500)
-                                    ->success()
-                                    ->send();
+                                // Notification::make('dish_added')
+                                //     ->title('Ret tilføjet')
+                                //     ->duration(1500)
+                                //     ->success()
+                                //     ->send();
                             })
                     ),
                 Select::make('tuesday_dish_id')

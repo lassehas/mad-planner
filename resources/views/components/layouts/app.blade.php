@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>{{ $title ?? 'Mad planner' }}</title>
-        @vite('resources/css/app.css')
         @filamentStyles
+        @vite('resources/css/app.css')
     </head>
     <body>
         <div class="pb-5">
