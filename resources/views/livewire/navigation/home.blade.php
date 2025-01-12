@@ -6,7 +6,7 @@
         <button wire:click="list_dishes" class="w-44 py-2 border-2 rounded-lg">Vis retter</button>
     </div>
     <div>
-        <button wire:click="list_ingredients" class="w-44 py-2 border-2 rounded-lg">Vis ingredienser</button>
+        <button wire:click="list_ingredients" class="w-44 py-2 border-2 rounded-lg">Vis varer</button>
     </div>
     @if (auth()->user()->find_suiteable_household() != null)
         <div>

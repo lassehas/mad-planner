@@ -31,14 +31,11 @@ class Ingredient extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Navn')
-                    ->disabled(),
+                    ->label('Navn'),
                 TextInput::make('quantity')
-                    ->label('Mængde/Antal')
-                    ->disabled(),
+                    ->label('Mængde/Antal'),
                 Select::make('unit_id')
                     ->label('Enhed')
-                    ->disabled()
                     ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
                 TextInput::make('price')
                     ->label('Pris')

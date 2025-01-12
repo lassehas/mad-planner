@@ -39,6 +39,26 @@ class WeekPlan extends Component  implements HasForms
                 TextInput::make('name')
                     ->label('Navn')
                     ->disabled(),
+                Select::make('sunday_dish_id')
+                    ->label('Søndag ret')
+                    ->options($options)
+                    ->suffixAction(
+                        Action::make('add_monday_dish_to_buy_list')
+                            ->label('')
+                            ->icon('heroicon-o-plus-circle')
+                            ->action(function ($state) {
+                                $dish = \App\Models\Dish::find($state);
+                                if (!$dish) {
+                                    return;
+                                }
+                                $this->household->add_dish_to_buy_list($dish);
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
+                            })
+                    ),
                 Select::make('monday_dish_id')
                     ->label('Mandag ret')
                     ->options($options)
@@ -52,11 +72,11 @@ class WeekPlan extends Component  implements HasForms
                                     return;
                                 }
                                 $this->household->add_dish_to_buy_list($dish);
-                                // Notification::make('dish_added')
-                                //     ->title('Ret tilføjet')
-                                //     ->duration(1500)
-                                //     ->success()
-                                //     ->send();
+                                Notification::make('dish_added')
+                                    ->title('Ret tilføjet')
+                                    ->duration(1500)
+                                    ->success()
+                                    ->send();
                             })
                     ),
                 Select::make('tuesday_dish_id')
@@ -141,26 +161,6 @@ class WeekPlan extends Component  implements HasForms
                     ),
                 Select::make('saturday_dish_id')
                     ->label('Lørdag ret')
-                    ->options($options)
-                    ->suffixAction(
-                        Action::make('add_monday_dish_to_buy_list')
-                            ->label('')
-                            ->icon('heroicon-o-plus-circle')
-                            ->action(function ($state) {
-                                $dish = \App\Models\Dish::find($state);
-                                if (!$dish) {
-                                    return;
-                                }
-                                $this->household->add_dish_to_buy_list($dish);
-                                Notification::make('dish_added')
-                                    ->title('Ret tilføjet')
-                                    ->duration(1500)
-                                    ->success()
-                                    ->send();
-                            })
-                    ),
-                Select::make('sunday_dish_id')
-                    ->label('Søndag ret')
                     ->options($options)
                     ->suffixAction(
                         Action::make('add_monday_dish_to_buy_list')

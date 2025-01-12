@@ -2,10 +2,10 @@
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr class="border-b-2">
-                <th style="text-align: left; width: 45%;">Navn</th>
+                <th style="text-align: left; width: 35%;">Navn</th>
                 <th style="text-align: left; width: 25%;">Mængde</th>
                 <th style="text-align: left; width: 20%;">Pris</th>
-                <th class="h-8" style="text-align: right; width: 10%;">
+                <th class="h-8" style="text-align: right; width: 20%;">
                     @if (count($items) > 0 && !$this->is_buy_list_purchased())
                         <button wire:click="purchase_all">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -38,6 +38,13 @@
                                 </svg>
                             </button>
                         @else
+                            <button wire:click="remove({{ $item->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </button>
                             <button wire:click="restore({{ $item->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">

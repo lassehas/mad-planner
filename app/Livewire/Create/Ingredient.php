@@ -9,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 
@@ -53,6 +54,15 @@ class Ingredient extends Component implements HasForms
     {
         if (!isset($this->data['name'], $this->data['price'], $this->data['quantity'], $this->data['unit_id'])) {
             return;
+        }
+
+        $ingredient = \App\Models\Ingredient::query()->firstWhere('name', $this->data['name']);
+        if ($ingredient){
+            Notification::make('exists')
+                ->title('Varen eksisterer allerede')
+                ->warning()
+                ->send();
+            return redirect()->route('creation.ingredient'); 
         }
 
         $ingredient = \App\Models\Ingredient::updateOrCreate([

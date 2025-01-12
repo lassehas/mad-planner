@@ -8,6 +8,7 @@ class Ingredients extends Component
 {
 
     public $ingredients = [];
+    public $query = '';
 
     public function mount()
     {
@@ -22,6 +23,13 @@ class Ingredients extends Component
     public function edit_ingredient($ingredient_id)
     {
         return redirect()->route('edit.ingredient', ['ingredient_id' => $ingredient_id]);
+    }
+
+    public function filter()
+    {
+        $this->ingredients = \App\Models\Ingredient::query()
+            ->where('name', 'like', '%' . $this->query . '%')
+            ->get();
     }
 
     public function add_to_buy_list($ingredient_id)

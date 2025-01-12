@@ -7,6 +7,7 @@ use Livewire\Component;
 class BuyItems extends Component
 {
     public $items = [];
+    public $household = null;
 
     public function mount($household_id)
     {
@@ -14,7 +15,8 @@ class BuyItems extends Component
         if (!$household->has_access(auth()->user())){
             return;
         }
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $household->id)->get();
+        $this->household = $household;
+        $this->fetch_items();
     }
     public function render()
     {
@@ -25,7 +27,7 @@ class BuyItems extends Component
     {
         $item = $this->items->find($item_id);
         $item->delete();
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $item->house_hold_id)->get();
+        $this->fetch_items();
     }
 
     public function purchase($item_id)
@@ -34,7 +36,12 @@ class BuyItems extends Component
         $item->update([
             'status' => 'purchased'
         ]);
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $item->house_hold_id)->get();
+        $this->fetch_items();
+    }
+
+    public function fetch_items()
+    {
+        $this->items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->orderBy('status')->get();
     }
 
     public function restore($item_id)
@@ -43,7 +50,7 @@ class BuyItems extends Component
         $item->update([
             'status' => null
         ]);
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $item->house_hold_id)->get();
+        $this->fetch_items();
     }
 
     public function remove_all()
@@ -61,7 +68,7 @@ class BuyItems extends Component
                 'status' => 'purchased'
             ]);
         }
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $this->items[0]->house_hold_id)->get();
+        $this->fetch_items();
     }
 
     public function is_buy_list_purchased()
