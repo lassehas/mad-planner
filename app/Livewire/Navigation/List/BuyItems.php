@@ -7,12 +7,13 @@ use Livewire\Component;
 class BuyItems extends Component
 {
     public $items = [];
+    public $items_combined = [];
     public $household = null;
 
     public function mount($household_id)
     {
         $household = \App\Models\HouseHold::find($household_id);
-        if (!$household->has_access(auth()->user())){
+        if (!$household->has_access(auth()->user())) {
             return;
         }
         $this->household = $household;
@@ -25,14 +26,14 @@ class BuyItems extends Component
 
     public function remove($item_id)
     {
-        $item = $this->items->find($item_id);
+        $item = $this->items->firstWhere('id',$item_id);
         $item->delete();
         $this->fetch_items();
     }
 
     public function purchase($item_id)
     {
-        $item = $this->items->find($item_id);
+        $item = $this->items->firstWhere('id',$item_id);
         $item->update([
             'status' => 'purchased'
         ]);
@@ -41,12 +42,44 @@ class BuyItems extends Component
 
     public function fetch_items()
     {
-        $this->items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->orderBy('status')->get();
+        $items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->orderBy('status')->get();
+
+        $uniqueItems = collect();
+
+        foreach ($items as $item) {
+            $existingItem = $uniqueItems->firstWhere('ingredient_id', $item->ingredient_id);
+
+            if ($existingItem) {
+                $existingItem->ingredient->quantity += $item->ingredient->quantity;
+                $existingItem->ingredient->price += $item->ingredient->price;
+                $item->status = 'purchased';
+                $item->save();
+            } else {
+                $uniqueItems->push($item);
+            }
+        }
+
+        $this->items = $uniqueItems;
+        // foreach ($items as $item){
+        //     $ingredient_item = $items->firstWhere('ingredient_id', $item->ingredient_id);
+        //     dump($ingredient_item);
+        //     if (!$ingredient_item){
+        //         continue;
+        //     }
+        //     if ($ingredient_item->id == $item->id){
+        //         continue;
+        //     }
+        //     $ingredient_item->ingredient->quantity += $item->ingredient->quantity;
+        //     $ingredient_item->ingredient->price += $item->ingredient->price;
+        //     $items->forget($item->id);
+        // }
+        // $this->items = $items;
+        // $this->items_combined = $new_array;
     }
 
     public function restore($item_id)
     {
-        $item = $this->items->find($item_id);
+        $item = $this->items->firstWhere('id',$item_id);
         $item->update([
             'status' => null
         ]);
@@ -55,7 +88,7 @@ class BuyItems extends Component
 
     public function remove_all()
     {
-        foreach ($this->items as $item){
+        foreach ($this->items as $item) {
             $item->delete();
         }
         $this->items = [];
@@ -63,7 +96,7 @@ class BuyItems extends Component
 
     public function purchase_all()
     {
-        foreach ($this->items->filter(fn ($it) => $it->status === null) as $item){
+        foreach ($this->items->filter(fn($it) => $it->status === null) as $item) {
             $item->update([
                 'status' => 'purchased'
             ]);
@@ -73,12 +106,12 @@ class BuyItems extends Component
 
     public function is_buy_list_purchased()
     {
-        if (count($this->items) == 0){
+        if (count($this->items) == 0) {
             return false;
         }
 
-        foreach ($this->items as $item){
-            if ($item->status != 'purchased'){
+        foreach ($this->items as $item) {
+            if ($item['status'] != 'purchased' || $item->status != 'purchased') {
                 return false;
             }
         }
@@ -88,7 +121,7 @@ class BuyItems extends Component
     public function total_price()
     {
         $total = 0;
-        foreach ($this->items as $item){
+        foreach ($this->items as $item) {
             $total += $item->ingredient->price;
         }
         return $total;

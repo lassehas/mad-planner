@@ -22,10 +22,14 @@
             @foreach ($items as $item)
                 <tr>
                     @php
+                        // $item = $items->where('ingredient_id', $key)->first();
+                        // if ($item == null){
+                        //     continue;
+                        // }
                         $is_purchased = $item->is_purchased() ? 'line-through' : '';
                     @endphp
                     <td class="{{ $is_purchased }}">{{ $item->ingredient->name }}</td>
-                    <td class="{{ $is_purchased }}"">{{ $item->ingredient->quantity }}
+                    <td class="{{ $is_purchased }}"">{{ $item->ingredient->quantity}}
                         {{ $item->ingredient->unit->name }}</td>
                     <td class="{{ $is_purchased }}"">{{ $item->ingredient->price }} kr.</td>
                     <td style="text-align: right;">
