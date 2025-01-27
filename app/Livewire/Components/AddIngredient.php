@@ -33,6 +33,7 @@ class AddIngredient extends Component implements HasForms
                 Select::make('ingredient')
                     ->label('Vare')
                     ->multiple()
+                    ->preload()
                     ->options(\App\Models\Ingredient::all()->mapWithKeys(fn($ingredient) => [$ingredient->id => "{$ingredient->name} {$ingredient->quantity} {$ingredient->unit->name}"]))
             ])->statePath('data');
     }

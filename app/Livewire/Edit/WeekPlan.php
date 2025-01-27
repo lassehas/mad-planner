@@ -42,7 +42,14 @@ class WeekPlan extends Component  implements HasForms
                 Select::make('sunday_dish_id')
                     ->label('Søndag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -58,11 +65,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('monday_dish_id')
                     ->label('Mandag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -78,11 +92,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('tuesday_dish_id')
                     ->label('Tirsdag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -98,11 +119,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('wednesday_dish_id')
                     ->label('Onsdag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -118,11 +146,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('thursday_dish_id')
                     ->label('Torsdag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -138,11 +173,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('friday_dish_id')
                     ->label('Fredag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -158,11 +200,18 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 Select::make('saturday_dish_id')
                     ->label('Lørdag ret')
                     ->options($options)
-                    ->suffixAction(
+                    ->searchable()
+                    ->suffixActions([
+                        Action::make('open_dish')
+                            ->icon('heroicon-o-pencil')
+                            ->visible(fn ($state) => $state)
+                            ->action(function ($state) {
+                                return redirect()->route('edit.dish', ['dish_id' => $state]);
+                            }),
                         Action::make('add_monday_dish_to_buy_list')
                             ->label('')
                             ->icon('heroicon-o-plus-circle')
@@ -178,7 +227,7 @@ class WeekPlan extends Component  implements HasForms
                                     ->success()
                                     ->send();
                             })
-                    ),
+                    ]),
                 TextInput::make('total_price')
                     ->label('Total Price')
                     ->suffix('Kr.')
