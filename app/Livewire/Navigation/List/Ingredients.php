@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Navigation\List;
 
+use Filament\Notifications\Notification;
 use Livewire\Component;
 
 class Ingredients extends Component
@@ -38,5 +39,10 @@ class Ingredients extends Component
         $user = auth()->user();
         $household = $user->find_suiteable_household();
         $household->add_ingredient_to_buy_list($ingredient);
+        Notification::make('added_to_buy_list')
+            ->title('Tilføjet til indkøbslisten')
+            ->success()
+            ->duration(1500)
+            ->send();
     }
 }

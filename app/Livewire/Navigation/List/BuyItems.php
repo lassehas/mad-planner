@@ -42,7 +42,7 @@ class BuyItems extends Component
 
     public function fetch_items()
     {
-        $items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->orderBy('status')->get();
+        $items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->get();
 
         $uniqueItems = collect();
 
@@ -58,8 +58,8 @@ class BuyItems extends Component
                 $uniqueItems->push($item);
             }
         }
-
-        $this->items = $uniqueItems;
+        // $this->items = $uniqueItems->groupBy('ingredient.category_id')->flatten()->sortBy('status');
+        $this->items = $uniqueItems->sortBy('ingredient.category.sort_order')->sortBy('status');
     }
 
     public function restore($item_id)

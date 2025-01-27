@@ -42,6 +42,10 @@ class Ingredient extends Component implements HasForms
                     ->label('Enhed')
                     ->required()
                     ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
+                Select::make('category_id')
+                    ->label('Kategori')
+                    ->searchable()
+                    ->options(fn() => \App\Models\IngredientCategory::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
             ])->columns(2)->statePath('data');
     }
 
@@ -60,7 +64,7 @@ class Ingredient extends Component implements HasForms
         }
 
         $ingredient = \App\Models\Ingredient::query()->whereName($ingredient_name)->whereQuantity($quantity)->where('unit_id', $unit_id)->first();
-        if ($ingredient){
+        if ($ingredient) {
             Notification::make('exists')
                 ->title('Varen eksisterer allerede')
                 ->warning()

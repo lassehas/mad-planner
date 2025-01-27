@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ingredient extends Model
 {
-    protected $fillable = ['name', 'price', 'quantity', 'unit_id'];
+    protected $fillable = ['name', 'price', 'quantity', 'unit_id', 'category_id'];
 
     public function dishes()
     {
@@ -17,6 +17,11 @@ class Ingredient extends Model
     public function unit()
     {
         return $this->BelongsTo(Unit::class);
+    }
+
+    public function category()
+    {
+        return $this->BelongsTo(\App\Models\IngredientCategory::class);
     }
 
     public function formatted_text()

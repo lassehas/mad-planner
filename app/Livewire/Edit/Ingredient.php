@@ -8,7 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Form;
-
+use Filament\Notifications\Notification;
 
 class Ingredient extends Component implements HasForms
 {
@@ -32,16 +32,22 @@ class Ingredient extends Component implements HasForms
             ->schema([
                 TextInput::make('name')
                     ->label('Navn'),
-                TextInput::make('quantity')
-                    ->label('Mængde/Antal'),
-                Select::make('unit_id')
-                    ->label('Enhed')
-                    ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
                 TextInput::make('price')
                     ->label('Pris')
                     ->numeric()
                     ->default(0)
-                    ->required(),
+                    ->required()
+                    ->suffix('Kr.'),
+                TextInput::make('quantity')
+                    ->label('Mængde/Antal'),
+                Select::make('unit_id')
+                    ->label('Enhed')
+                    ->searchable()
+                    ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
+                Select::make('category_id')
+                    ->label('Kategori')
+                    ->searchable()
+                    ->options(fn() => \App\Models\IngredientCategory::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
             ])->columns(2)->statePath('data');
     }
 
@@ -54,5 +60,10 @@ class Ingredient extends Component implements HasForms
     {
         $this->validate();
         $this->ingredient->update($this->data);
+        Notification::make('vare_opdateret')
+            ->success()
+            ->title('Vare opdateret')
+            ->duration(1500)
+            ->send();
     }
 }
