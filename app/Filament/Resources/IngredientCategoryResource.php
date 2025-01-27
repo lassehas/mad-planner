@@ -39,7 +39,7 @@ class IngredientCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('sort_order')
+                Tables\Columns\TextInputColumn::make('sort_order')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
