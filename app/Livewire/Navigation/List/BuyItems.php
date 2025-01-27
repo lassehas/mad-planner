@@ -58,8 +58,12 @@ class BuyItems extends Component
                 $uniqueItems->push($item);
             }
         }
-        // $this->items = $uniqueItems->groupBy('ingredient.category_id')->flatten()->sortBy('status');
-        $this->items = $uniqueItems->sortBy('ingredient.category.sort_order')->sortBy('status');
+        $this->items = $uniqueItems->sortBy(function ($item){
+            if (!isset($item->ingredient->category)){
+                return 9899;
+            }
+            return $item->ingredient->category->sort_order;
+        })->sortBy('status');
     }
 
     public function restore($item_id)

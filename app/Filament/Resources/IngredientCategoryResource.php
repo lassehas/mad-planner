@@ -30,6 +30,8 @@ class IngredientCategoryResource extends Resource
                     ->numeric()
                     ->default(1)
                     ->step(1),
+                Forms\Components\TextInput::make('icon')
+                    ->maxLength(255),
             ]);
     }
 

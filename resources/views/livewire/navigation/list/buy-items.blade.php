@@ -28,8 +28,13 @@
                         // }
                         $is_purchased = $item->is_purchased() ? 'line-through' : '';
                     @endphp
-                    <td class="{{ $is_purchased }}">{{ $item->ingredient->name }}</td>
-                    <td class="{{ $is_purchased }}"">{{ $item->ingredient->quantity}}
+                    <td class="{{ $is_purchased }} flex items-center">
+                        @if ($item->ingredient->category != null && $item->ingredient->category->icon != null)
+                            @svg($item->ingredient->category->icon, 'w-4 h-4')
+                        @endif
+                        {{ $item->ingredient->name }}
+                    </td>
+                    <td class="{{ $is_purchased }}"">{{ $item->ingredient->quantity }}
                         {{ $item->ingredient->unit->name }}</td>
                     <td class="{{ $is_purchased }}"">{{ $item->ingredient->price }} kr.</td>
                     <td style="text-align: right;">

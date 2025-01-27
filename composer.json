@@ -7,9 +7,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "afatmustafa/blade-hugeicons": "^0.0.4",
+        "codeat3/blade-carbon-icons": "^2.32",
+        "codeat3/blade-google-material-design-icons": "^1.19",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "mallardduck/blade-lucide-icons": "^1.23",
+        "secondnetwork/blade-tabler-icons": "^3.29"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

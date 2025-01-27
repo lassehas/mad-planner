@@ -15,7 +15,12 @@
         <tbody>
             @foreach ($ingredients as $ingredient)
                 <tr>
-                    <td>{{ $ingredient->name }}</td>
+                    <td class="flex items-center">
+                        @if ($ingredient->category != null && $ingredient->category->icon != null)
+                            @svg($ingredient->category->icon, 'w-4 h-4')
+                        @endif
+                        {{ $ingredient->name }}
+                    </td>
                     <td>{{ $ingredient->quantity }} {{ $ingredient->unit->name }}</td>
                     <td>{{ $ingredient->price }} kr.</td>
                     <td style="text-align: right;">
