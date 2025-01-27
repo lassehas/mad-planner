@@ -72,6 +72,14 @@ class BottomBar extends Component
 
     public function week_plan_name()
     {
+
+        $date = now();
+        if ($date->dayOfWeek == 0) {
+            $year = $date->addDay()->year;
+            $week = $date->addDay()->weekOfYear;
+            return "Uge $week - $year";
+        }
+
         $year = now()->year;
         $week = now()->weekOfYear;
         return "Uge $week - $year";

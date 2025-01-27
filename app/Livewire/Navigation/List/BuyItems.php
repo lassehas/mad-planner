@@ -60,21 +60,6 @@ class BuyItems extends Component
         }
 
         $this->items = $uniqueItems;
-        // foreach ($items as $item){
-        //     $ingredient_item = $items->firstWhere('ingredient_id', $item->ingredient_id);
-        //     dump($ingredient_item);
-        //     if (!$ingredient_item){
-        //         continue;
-        //     }
-        //     if ($ingredient_item->id == $item->id){
-        //         continue;
-        //     }
-        //     $ingredient_item->ingredient->quantity += $item->ingredient->quantity;
-        //     $ingredient_item->ingredient->price += $item->ingredient->price;
-        //     $items->forget($item->id);
-        // }
-        // $this->items = $items;
-        // $this->items_combined = $new_array;
     }
 
     public function restore($item_id)

@@ -9,10 +9,10 @@
 
         <x-filament-actions::modals />
     </x-filament::section>
-    <x-filament::section>
+    <x-filament::section class="mt-4">
         @livewire('components.add-ingredient', ['dish_id' => $dish->id])
 
-        <h2 class="text-black dark:text-white">Ingredienser</h2>
+        <h2 class="text-black dark:text-white">Varer</h2>
         @foreach ($dish->ingredients as $ingredient)
             <div class="text-black dark:text-white">
                 <span>{{ $ingredient->formatted_text() }}</span>

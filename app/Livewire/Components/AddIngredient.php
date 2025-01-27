@@ -31,7 +31,8 @@ class AddIngredient extends Component implements HasForms
         return $form
             ->schema([
                 Select::make('ingredient')
-                    ->label('Ingredient')
+                    ->label('Vare')
+                    ->multiple()
                     ->options(\App\Models\Ingredient::all()->mapWithKeys(fn($ingredient) => [$ingredient->id => "{$ingredient->name} {$ingredient->quantity} {$ingredient->unit->name}"]))
             ])->statePath('data');
     }
@@ -41,14 +42,13 @@ class AddIngredient extends Component implements HasForms
         if ($this->data['ingredient'] == null) {
             return;
         }
+        $ingredients = \App\Models\Ingredient::whereIn('id', $this->data['ingredient'])->get();
 
-        $ingredient = \App\Models\Ingredient::find($this->data['ingredient']);
-
-        if ($ingredient == null) {
+        if ($ingredients->isEmpty()) {
             return;
         }
 
-        $this->dish->add_ingredient($ingredient);
+        $this->dish->add_ingredients($ingredients);
         $this->dish->update_total_price();
         return redirect()->route('edit.dish', ['dish_id' => $this->dish->id]);
     }

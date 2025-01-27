@@ -22,6 +22,16 @@ class Dish extends Model
         $this->update_total_price();
     }
 
+    public function add_ingredients($ingredients)
+    {
+        foreach ($ingredients as $ingredient){
+            $this->ingredients()->syncWithoutDetaching([
+                $ingredient->id
+            ]);
+        }
+        $this->update_total_price();
+    }
+
     public function remove_ingredient($ingredient_id)
     {
         $this->ingredients()->detach([

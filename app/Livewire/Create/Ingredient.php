@@ -52,17 +52,20 @@ class Ingredient extends Component implements HasForms
 
     public function create()
     {
-        if (!isset($this->data['name'], $this->data['price'], $this->data['quantity'], $this->data['unit_id'])) {
+        $ingredient_name = $this->data['name'];
+        $quantity = $this->data['quantity'];
+        $unit_id = $this->data['unit_id'];
+        if (!isset($ingredient_name, $this->data['price'], $quantity, $unit_id)) {
             return;
         }
 
-        $ingredient = \App\Models\Ingredient::query()->firstWhere('name', $this->data['name']);
+        $ingredient = \App\Models\Ingredient::query()->whereName($ingredient_name)->whereQuantity($quantity)->where('unit_id', $unit_id)->first();
         if ($ingredient){
             Notification::make('exists')
                 ->title('Varen eksisterer allerede')
                 ->warning()
                 ->send();
-            return redirect()->route('creation.ingredient'); 
+            return;
         }
 
         $ingredient = \App\Models\Ingredient::updateOrCreate([
@@ -72,6 +75,9 @@ class Ingredient extends Component implements HasForms
         ], [
             'price' => $this->data['price'],
         ]);
+        Notification::make('success')
+            ->title('Varen er blevet oprettet')
+            ->send();
         return redirect()->route('creation.ingredient');
     }
 }
