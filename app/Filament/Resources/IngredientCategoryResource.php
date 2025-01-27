@@ -28,6 +28,7 @@ class IngredientCategoryResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('sort_order')
                     ->numeric()
+                    ->default(1)
                     ->step(1),
             ]);
     }
