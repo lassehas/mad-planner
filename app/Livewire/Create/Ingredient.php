@@ -41,6 +41,7 @@ class Ingredient extends Component implements HasForms
                 Select::make('unit_id')
                     ->label('Enhed')
                     ->required()
+                    ->searchable()
                     ->options(fn() => \App\Models\Unit::all()->mapWithKeys(fn($model) => [$model->id => $model->name])),
                 Select::make('category_id')
                     ->label('Kategori')
