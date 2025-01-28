@@ -26,14 +26,14 @@ class BuyItems extends Component
 
     public function remove($item_id)
     {
-        $item = $this->items->firstWhere('id',$item_id);
+        $item = $this->items->firstWhere('id', $item_id);
         $item->delete();
         $this->fetch_items();
     }
 
     public function purchase($item_id)
     {
-        $item = $this->items->firstWhere('id',$item_id);
+        $item = $this->items->firstWhere('id', $item_id);
         $item->update([
             'status' => 'purchased'
         ]);
@@ -47,7 +47,9 @@ class BuyItems extends Component
         $uniqueItems = collect();
 
         foreach ($items as $item) {
-            $existingItem = $uniqueItems->firstWhere('ingredient_id', $item->ingredient_id);
+            $existingItem = $uniqueItems->filter(fn($i) => $i->ingredient->unit_id == $item->ingredient->unit_id
+                && $i->ingredient->name === $item->ingredient->name)->first();
+            // $existingItem = $uniqueItems->firstWhere('ingredient_id', $item->ingredient_id);
 
             if ($existingItem) {
                 $existingItem->ingredient->quantity += $item->ingredient->quantity;
@@ -58,8 +60,8 @@ class BuyItems extends Component
                 $uniqueItems->push($item);
             }
         }
-        $this->items = $uniqueItems->sortBy(function ($item){
-            if (!isset($item->ingredient->category)){
+        $this->items = $uniqueItems->sortBy(function ($item) {
+            if (!isset($item->ingredient->category)) {
                 return 9899;
             }
             return $item->ingredient->category->sort_order;
@@ -68,7 +70,7 @@ class BuyItems extends Component
 
     public function restore($item_id)
     {
-        $item = $this->items->firstWhere('id',$item_id);
+        $item = $this->items->firstWhere('id', $item_id);
         $item->update([
             'status' => null
         ]);
