@@ -1,4 +1,4 @@
-<div class="px-1 pt-1 pb-6">
+<div class="px-1 pt-1 pb-12">  
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr class="border-b-2">
@@ -83,4 +83,10 @@
             </tr>
         </tbody>
     </table>
+    <div class="fixed bottom-12 right-3">
+        <div class="bg-green-500 text-white p-2 rounded-full shadow-lg flex justify-center items-center">
+            {{ $this->addBuy }}
+        </div>
+        <x-filament-actions::modals />
+    </div>
 </div>

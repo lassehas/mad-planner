@@ -3,9 +3,17 @@
 namespace App\Livewire\Navigation\List;
 
 use Livewire\Component;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 
-class BuyItems extends Component
+class BuyItems extends Component implements HasForms, HasActions
 {
+    use InteractsWithActions;
+    use InteractsWithForms;
     public $items = [];
     public $items_combined = [];
     public $household = null;
@@ -49,7 +57,6 @@ class BuyItems extends Component
         foreach ($items as $item) {
             $existingItem = $uniqueItems->filter(fn($i) => $i->ingredient->unit_id == $item->ingredient->unit_id
                 && $i->ingredient->name === $item->ingredient->name)->first();
-            // $existingItem = $uniqueItems->firstWhere('ingredient_id', $item->ingredient_id);
 
             if ($existingItem) {
                 $existingItem->ingredient->quantity += $item->ingredient->quantity;
@@ -116,5 +123,33 @@ class BuyItems extends Component
             $total += $item->ingredient->price;
         }
         return $total;
+    }
+
+    public function addBuy(): Action
+    {
+        return Action::make('addBuy')
+            ->icon('heroicon-o-plus-circle')
+            ->hiddenLabel()
+            ->modalCancelActionLabel('Anullere')
+            ->modalSubmitActionLabel('Tilføj')
+            ->form([
+                Select::make('ingredients')
+                    ->multiple()
+                    ->required()
+                    ->options(\App\Models\Ingredient::all()->mapWithKeys(fn($ingredient) => [$ingredient->id => "{$ingredient->name} {$ingredient->quantity} {$ingredient->unit->name}"])),
+            ])
+            ->action(function ($data){
+                if ($data['ingredients'] == null) {
+                    return;
+                }
+                foreach ($data['ingredients'] as $ingredient_id) {
+                    \App\Models\BuyItem::create([
+                        'house_hold_id' => $this->household->id,
+                        'ingredient_id' => $ingredient_id,
+                        'status' => null
+                    ]);
+                }
+                return redirect()->route('list.buy-items', ['household_id' => $this->household->id]);
+            });
     }
 }
