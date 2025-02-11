@@ -40,7 +40,6 @@ class Dish extends Component implements HasForms
                     ->suffix('Kr.'),
                 TextInput::make('url')
                     ->label('Link')
-                    ->url()
                     ->suffixAction(
                         Action::make('open')
                             ->icon('heroicon-o-arrow-up-right')
