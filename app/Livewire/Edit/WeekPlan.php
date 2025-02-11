@@ -46,6 +46,7 @@ class WeekPlan extends Component  implements HasForms
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
+                            ->openUrlInNewTab()
                             ->visible(fn ($state) => $state)
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
@@ -73,6 +74,7 @@ class WeekPlan extends Component  implements HasForms
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
+                            ->openUrlInNewTab()
                             ->visible(fn ($state) => $state)
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
@@ -100,6 +102,7 @@ class WeekPlan extends Component  implements HasForms
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
+                            ->openUrlInNewTab()
                             ->visible(fn ($state) => $state)
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
@@ -127,6 +130,7 @@ class WeekPlan extends Component  implements HasForms
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
+                            ->openUrlInNewTab()
                             ->visible(fn ($state) => $state)
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
@@ -155,6 +159,7 @@ class WeekPlan extends Component  implements HasForms
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
                             ->visible(fn ($state) => $state)
+                            ->openUrlInNewTab()
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
                             }),
@@ -181,6 +186,7 @@ class WeekPlan extends Component  implements HasForms
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
+                            ->openUrlInNewTab()
                             ->visible(fn ($state) => $state)
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
@@ -209,6 +215,7 @@ class WeekPlan extends Component  implements HasForms
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
                             ->visible(fn ($state) => $state)
+                            ->openUrlInNewTab()
                             ->action(function ($state) {
                                 return redirect()->route('edit.dish', ['dish_id' => $state]);
                             }),
