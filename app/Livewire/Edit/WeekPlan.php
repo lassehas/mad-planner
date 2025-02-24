@@ -43,6 +43,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Søndag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -71,6 +72,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Mandag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -99,6 +101,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Tirsdag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -127,6 +130,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Onsdag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -155,6 +159,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Torsdag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -183,6 +188,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Fredag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -211,6 +217,7 @@ class WeekPlan extends Component  implements HasForms
                     ->label('Lørdag ret')
                     ->options($options)
                     ->searchable()
+                    ->live(debounce: 500)
                     ->suffixActions([
                         Action::make('open_dish')
                             ->icon('heroicon-o-pencil')
@@ -246,10 +253,26 @@ class WeekPlan extends Component  implements HasForms
         return view('livewire.edit.week-plan');
     }
 
-    public function update()
+    public function update($should_redirect = true)
     {
         $this->validate();
         $this->week_plan->update($this->data);
-        return redirect()->route('edit.week-plan', ['week_plan_id' => $this->week_plan->id]);
+        \Log::debug("WeekPlan :: update :: data", [$this->data]);
+        if ($should_redirect){
+            return redirect()->route('edit.week-plan', ['week_plan_id' => $this->week_plan->id]);
+        }
+    }
+
+    public function updated($property, $value)
+    {
+        \Log::debug("WeekPlan :: updated :: property", [$property, $value]);
+        if ($this->week_plan) {
+            $this->update(true);
+            // if (\Str::contains($property, 'data.')){
+            //     $property = \Str::replace('data.', '', $property);
+            // }
+            // $this->week_plan->{$property} = $value;
+            // $this->week_plan->save();
+        }
     }
 }

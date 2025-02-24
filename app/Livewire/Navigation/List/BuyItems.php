@@ -15,8 +15,11 @@ class BuyItems extends Component implements HasForms, HasActions
     use InteractsWithActions;
     use InteractsWithForms;
     public $items = [];
-    public $items_combined = [];
+    public $total_items = [];
     public $household = null;
+    public $quantity = 1;
+    public $show_modal = false;
+    public $editing_ingredient_id = null;
 
     public function mount($household_id)
     {
@@ -51,7 +54,7 @@ class BuyItems extends Component implements HasForms, HasActions
     public function fetch_items()
     {
         $items = \App\Models\BuyItem::where('house_hold_id', $this->household->id)->get();
-
+        $this->total_items = $items;
         $uniqueItems = collect();
 
         foreach ($items as $item) {
@@ -73,6 +76,12 @@ class BuyItems extends Component implements HasForms, HasActions
             }
             return $item->ingredient->category->sort_order;
         })->sortBy('status');
+    }
+
+    public function edit($item_id)
+    {
+        $item = $this->items->firstWhere('id', $item_id);
+        return redirect()->route('edit.ingredient', ['ingredient_id' => $item->ingredient_id]);
     }
 
     public function restore($item_id)
@@ -125,6 +134,18 @@ class BuyItems extends Component implements HasForms, HasActions
         return $total;
     }
 
+    public function open_modal($ingredient_id)
+    {
+        $this->set_quantity($ingredient_id);
+        $this->show_modal = true;
+        $this->editing_ingredient_id = $ingredient_id;
+    }
+
+    public function close_modal()
+    {
+        $this->show_modal = false;
+    }
+
     public function addBuy(): Action
     {
         return Action::make('addBuy')
@@ -138,7 +159,7 @@ class BuyItems extends Component implements HasForms, HasActions
                     ->required()
                     ->options(\App\Models\Ingredient::all()->mapWithKeys(fn($ingredient) => [$ingredient->id => "{$ingredient->name} {$ingredient->quantity} {$ingredient->unit->name}"])),
             ])
-            ->action(function ($data){
+            ->action(function ($data) {
                 if ($data['ingredients'] == null) {
                     return;
                 }
@@ -151,5 +172,51 @@ class BuyItems extends Component implements HasForms, HasActions
                 }
                 return redirect()->route('list.buy-items', ['household_id' => $this->household->id]);
             });
+    }
+
+    public function increment()
+    {
+        $this->quantity++;
+    }
+
+    public function decrement()
+    {
+        if ($this->quantity > 1) {
+            $this->quantity--;
+        }
+    }
+
+    public function save_modal()
+    {
+
+        $base_quantity = $this->get_quantity_for_ingredient($this->editing_ingredient_id);
+        $edited_quantity = $this->quantity;
+        $diff = $edited_quantity - $base_quantity;
+        if ($diff > 0) {
+            for ($i = 0; $i < $diff; $i++) {
+                \App\Models\BuyItem::create([
+                    'house_hold_id' => $this->household->id,
+                    'ingredient_id' => $this->editing_ingredient_id,
+                    'status' => 'purchased'
+                ]);
+            }
+        } else {
+            $items = $this->total_items->where('ingredient_id', $this->editing_ingredient_id)->where('status', 'purchased')->take(abs($diff));
+            foreach ($items as $item) {
+                $item->delete();
+            }
+        }
+
+        return redirect()->route('list.buy-items', ['household_id' => $this->household->id]);
+    }
+
+    public function get_quantity_for_ingredient($ingredient_id)
+    {
+        return $this->total_items->where('ingredient_id', $ingredient_id)->count();
+    }
+
+    public function set_quantity($ingredient_id)
+    {
+        $this->quantity = $this->get_quantity_for_ingredient($ingredient_id);
     }
 }

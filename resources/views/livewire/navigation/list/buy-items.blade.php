@@ -1,4 +1,4 @@
-<div class="px-1 pt-1 pb-20">  
+<div class="px-1 pt-1 pb-20">
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr class="border-b-2">
@@ -39,6 +39,25 @@
                     <td class="{{ $is_purchased }}"">{{ $item->ingredient->price }} kr.</td>
                     <td style="text-align: right;">
                         @if (!$item->is_purchased())
+                            <button wire:click="open_modal({{ $item->ingredient_id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6">
+                                    <!-- Outer Rounded Rectangle -->
+                                    <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                                
+                                    <!-- Minus (-) Symbol -->
+                                    <line x1="7" y1="12" x2="17" y2="12"></line>
+                                
+                                    <!-- Slash (/) to Represent "+/-" -->
+                                    <line x1="9" y1="16" x2="15" y2="8"></line>
+                                </svg>
+                            </button>
+                            <button wire:click="edit({{ $item->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 3 21 9 9 21 3 21 3 15 15 3Z" />
+                                </svg>
+                            </button>
                             <button wire:click="purchase({{ $item->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -83,6 +102,29 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        @if ($show_modal)
+            <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+                    <h2 class="text-lg font-semibold mb-4">Modify Item</h2>
+
+                    <!-- Quantity Controls -->
+                    <div class="flex items-center justify-between">
+                        <button wire:click="decrement" class="px-3 py-2 bg-gray-200 rounded-full">-</button>
+                        <input type="number" wire:model="quantity" class="text-center border rounded w-16"
+                            min="1">
+                        <button wire:click="increment" class="px-3 py-2 bg-gray-200 rounded-full">+</button>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="flex justify-end space-x-2 mt-4">
+                        <button wire:click="close_modal" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                        <button wire:click="save_modal" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
     <div class="fixed bottom-12 right-3">
         <div class="bg-green-500 text-white p-2 rounded-full shadow-lg flex justify-center items-center">
             {{ $this->addBuy }}
