@@ -2,10 +2,10 @@
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr class="border-b-2">
-                <th style="text-align: left; width: 35%;">Navn</th>
+                <th style="text-align: left; width: 30%;">Navn</th>
                 <th style="text-align: left; width: 25%;">Mængde</th>
                 <th style="text-align: left; width: 20%;">Pris</th>
-                <th class="h-8" style="text-align: right; width: 20%;">
+                <th class="h-8" style="text-align: right; width: 25%;">
                     @if (count($items) > 0 && !$this->is_buy_list_purchased())
                         <button wire:click="purchase_all">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -43,10 +43,10 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6">
                                     <!-- Outer Rounded Rectangle -->
                                     <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
-                                
+
                                     <!-- Minus (-) Symbol -->
                                     <line x1="7" y1="12" x2="17" y2="12"></line>
-                                
+
                                     <!-- Slash (/) to Represent "+/-" -->
                                     <line x1="9" y1="16" x2="15" y2="8"></line>
                                 </svg>
